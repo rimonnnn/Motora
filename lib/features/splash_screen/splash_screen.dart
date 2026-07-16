@@ -176,7 +176,7 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                   ),
 
-                  HeightSpace(16),
+                  HeightSpace(22),
 
                   SlideTransition(
                     position: _titleSlideAnimation,
