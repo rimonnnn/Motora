@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:motora/core/styling/app_colors.dart';
 import 'package:motora/core/styling/app_fonts.dart';
 
 class AppStyles {
-  static TextStyle primaryHeadLineSyle = TextStyle(
-    color: Color(0xff617AFD),
+  static TextStyle primaryHeadLineStyle = TextStyle(
+    color: AppColors.primaryColor,
     fontSize: 30.sp,
     fontFamily: AppFonts.appFonts,
     fontWeight: FontWeight.bold,
   );
   static TextStyle suptitleStyle = TextStyle(
-    color: Color(0xff8391A1),
+    color: AppColors.secondaryColor,
     fontSize: 16.sp,
     fontFamily: AppFonts.appFonts,
     fontWeight: FontWeight.w500,
@@ -25,13 +26,13 @@ class AppStyles {
     fontFamily: AppFonts.appFonts,
     fontSize: 32.sp,
     fontWeight: FontWeight.w600,
-    color: Color(0xff1A1A1A),
+    color: AppColors.blackColor,
   );
   static TextStyle grey12Medium = TextStyle(
     fontFamily: AppFonts.appFonts,
     fontSize: 12.sp,
     fontWeight: FontWeight.normal,
-    color: Color(0xff9CA4AB),
+    color: AppColors.greyColor,
   );
   static TextStyle white15W500 = TextStyle(
     fontFamily: AppFonts.appFonts,
@@ -43,10 +44,10 @@ class AppStyles {
     fontFamily: AppFonts.appFonts,
     fontSize: 16.sp,
     fontWeight: FontWeight.w600,
-    color: Color(0xff1A1A1A),
+    color: AppColors.blackColor,
   );
   static TextStyle blue15W500Style = TextStyle(
-    color: Color(0xff617AFD),
+    color: AppColors.primaryColor,
     fontSize: 15.sp,
     fontFamily: AppFonts.appFonts,
     fontWeight: FontWeight.w500,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:motora/core/routing/app_routes.dart';
 import 'package:motora/core/styling/app_assets.dart';
 import 'package:motora/core/styling/app_colors.dart';
 import 'package:motora/core/widgets/spacing_widgets.dart';
@@ -119,6 +121,7 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(const Duration(milliseconds: 3200));
 
     if (!mounted) return;
+    GoRouter.of(context).pushReplacementNamed(AppRoutes.loginScreen);
 
     // ضع هنا كود الـ Navigation
     //
