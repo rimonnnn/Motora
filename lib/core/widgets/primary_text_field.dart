@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motora/core/styling/app_colors.dart';
@@ -12,6 +11,9 @@ class PrimaryTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final Color fillColor;
+  final TextInputType? keyboardType; // <-- جديد
+
   const PrimaryTextField({
     super.key,
     this.hintText,
@@ -21,21 +23,23 @@ class PrimaryTextField extends StatelessWidget {
     this.validator,
     this.width,
     this.onChanged,
+    this.keyboardType, // <-- جديد
+    required this.fillColor,
   });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: width ?? 350.w,
-
       child: TextFormField(
         controller: controller,
         validator: validator,
         onChanged: onChanged,
+        keyboardType: keyboardType, // <-- جديد
         cursorColor: AppColors.primaryColor,
         obscureText: isPassword ?? false,
         decoration: InputDecoration(
-          fillColor: Colors.white,
+          fillColor: fillColor,
           contentPadding: EdgeInsets.symmetric(vertical: 15, horizontal: 12),
           hintText: hintText ?? "",
           hintStyle: TextStyle(

@@ -12,7 +12,7 @@ class AppTheme {
     brightness: Brightness.light,
     fontFamily: AppFonts.appFonts,
     textTheme: TextTheme(
-      titleLarge: AppStyles.primaryHeadLineSyle,
+      titleLarge: AppStyles.primaryHeadLineStyle,
       titleMedium: AppStyles.suptitleStyle,
     ),
     buttonTheme: ButtonThemeData(buttonColor: AppColors.primaryColor),
