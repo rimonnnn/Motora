@@ -14,19 +14,16 @@ class SplashLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: Listenable.merge([opacity, scale]),
-      builder: (ctx, child) {
-        return FadeTransition(
-          opacity: opacity,
-          child: ScaleTransition(scale: scale, child: child),
-        );
-      },
-      child: Image.asset(
-        assetPath,
-        width: 120,
-        height: 120,
-        fit: BoxFit.contain,
+    return FadeTransition(
+      opacity: opacity,
+      child: ScaleTransition(
+        scale: scale,
+        child: Image.asset(
+          assetPath,
+          width: 120,
+          height: 120,
+          fit: BoxFit.contain,
+        ),
       ),
     );
   }
