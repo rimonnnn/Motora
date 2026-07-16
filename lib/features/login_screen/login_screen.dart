@@ -77,11 +77,14 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 HeightSpace(24),
-                Text("Welcome back", style: AppStyles.black32SemiBold),
+                Center(
+                  child: Text("Welcome back", style: AppStyles.black32SemiBold),
+                ),
                 HeightSpace(8),
                 Text(
                   "Log in to manage your luxury fleet and track your latest acquistions",
                   style: AppStyles.suptitleStyle,
+                  textAlign: TextAlign.center,
                 ),
                 HeightSpace(16),
                 Text("Email Address", style: AppStyles.grey12Medium),
