@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:motora/core/routing/app_routes.dart';
 import 'package:motora/core/styling/app_colors.dart';
 import 'package:motora/core/styling/app_styles.dart';
+import 'package:motora/core/utils/app_validation.dart';
 import 'package:motora/core/widgets/primary_button_widget.dart';
 import 'package:motora/core/widgets/primary_text_field.dart';
 import 'package:motora/core/widgets/spacing_widgets.dart';
@@ -32,27 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return "Email is required";
-    }
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegex.hasMatch(value.trim())) {
-      return "Enter a valid email address";
-    }
-    return null;
-  }
-
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Password is required";
-    }
-    if (value.length < 6) {
-      return "Password must be at least 6 characters";
-    }
-    return null;
   }
 
   @override
@@ -92,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 PrimaryTextField(
                   width: 358.w,
                   controller: _emailController,
-                  validator: _validateEmail,
+                  validator: AppValidation.validateEmail,
                   keyboardType:
                       TextInputType.emailAddress, // <-- دلوقتي شغال بعد التعديل
                   hintText: "name@company.com",
@@ -110,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   fillColor: Color(0xffFFFFFF),
                   width: 358.w,
                   controller: _passwordController,
-                  validator: _validatePassword,
+                  validator: AppValidation.validatePassword,
                   isPassword: _obscurePassword, // <-- بدل obscureText
                   hintText: "••••••••",
                   suffixIcon: IconButton(

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:motora/core/routing/app_routes.dart';
 import 'package:motora/core/styling/app_colors.dart';
 import 'package:motora/core/styling/app_styles.dart';
+import 'package:motora/core/utils/app_validation.dart';
 import 'package:motora/core/widgets/primary_button_widget.dart';
 import 'package:motora/core/widgets/primary_text_field.dart';
 import 'package:motora/core/widgets/spacing_widgets.dart';
@@ -39,55 +40,6 @@ class _LoginScreenState extends State<SignUpScreen> {
     _phoneController.dispose();
     _confirmPasswordController.dispose();
     super.dispose();
-  }
-
-  String? _validateEmail(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return "Email is required";
-    }
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegex.hasMatch(value.trim())) {
-      return "Enter a valid email address";
-    }
-    return null;
-  }
-
-  String? _validatePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Password is required";
-    }
-    if (value.length < 6) {
-      return "Password must be at least 6 characters";
-    }
-    return null;
-  }
-
-  String? _validateFullName(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return "Full name is required";
-    }
-    return null;
-  }
-
-  String? _validatePhone(String? value) {
-    if (value == null || value.trim().isEmpty) {
-      return "Phone number is required";
-    }
-    final phoneRegex = RegExp(r'^(01)[0-9]{9}$');
-    if (!phoneRegex.hasMatch(value.trim())) {
-      return "Enter a valid phone number";
-    }
-    return null;
-  }
-
-  String? _validateConfirmPassword(String? value) {
-    if (value == null || value.isEmpty) {
-      return "Confirm password is required";
-    }
-    if (value != _passwordController.text) {
-      return "Passwords do not match";
-    }
-    return null;
   }
 
   @override
@@ -133,7 +85,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                 PrimaryTextField(
                   width: 358.w,
                   controller: _fullNameController,
-                  validator: _validateFullName,
+                  validator: AppValidation.validateFullName,
                   keyboardType: TextInputType.text,
                   hintText: "Enter your full name",
                   suffixIcon: Icon(
@@ -149,7 +101,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                 PrimaryTextField(
                   width: 358.w,
                   controller: _emailController,
-                  validator: _validateEmail,
+                  validator: AppValidation.validateEmail,
                   keyboardType:
                       TextInputType.emailAddress, // <-- دلوقتي شغال بعد التعديل
                   hintText: "name@company.com",
@@ -167,7 +119,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                 PrimaryTextField(
                   width: 358.w,
                   controller: _phoneController,
-                  validator: _validatePhone,
+                  validator: AppValidation.validatePhone,
                   keyboardType: TextInputType.phone,
                   hintText: "01xxxxxxxxx",
                   suffixIcon: Icon(
@@ -184,7 +136,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                   fillColor: Color(0xffFFFFFF),
                   width: 358.w,
                   controller: _passwordController,
-                  validator: _validatePassword,
+                  validator: AppValidation.validatePassword,
                   isPassword: _obscurePassword, // <-- بدل obscureText
                   hintText: "••••••••",
                   suffixIcon: IconButton(
@@ -207,7 +159,7 @@ class _LoginScreenState extends State<SignUpScreen> {
                   fillColor: Color(0xffFFFFFF),
                   width: 358.w,
                   controller: _confirmPasswordController,
-                  validator: _validateConfirmPassword,
+                  validator: (v) => AppValidation.validateConfirmPassword(v, _passwordController.text),
                   isPassword: _obscureConfirmPassword,
                   hintText: "••••••••",
                   suffixIcon: IconButton(
