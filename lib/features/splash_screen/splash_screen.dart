@@ -121,7 +121,7 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(const Duration(milliseconds: 3200));
 
     if (!mounted) return;
-    GoRouter.of(context).pushReplacementNamed(AppRoutes.loginScreen);
+    GoRouter.of(context).pushReplacementNamed(AppRoutes.onboardingScreen);
 
     // ضع هنا كود الـ Navigation
     //
