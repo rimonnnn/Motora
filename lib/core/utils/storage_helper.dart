@@ -1,5 +1,6 @@
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:motora/core/constants/storageKeys.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class StorageHelper {
   final storage = FlutterSecureStorage(
@@ -24,5 +25,15 @@ class StorageHelper {
   Future<void> clearTokens() async {
     await storage.delete(key: "accessToken");
     await storage.delete(key: "refreshToken");
+  }
+
+  static Future<void> setOnboardingSeen() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(StorageKeys.onboardingSeen, true);
+  }
+
+  static Future<bool> isOnboardingSeen() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(StorageKeys.onboardingSeen) ?? false;
   }
 }
