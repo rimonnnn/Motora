@@ -6,6 +6,7 @@ import 'package:motora/core/styling/app_assets.dart';
 import 'package:motora/core/styling/app_colors.dart';
 import 'package:motora/core/widgets/spacing_widgets.dart';
 import 'package:motora/features/splash_screen/widgets/splash_logo.dart';
+import 'package:motora/main.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -145,77 +146,95 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: Listenable.merge([_backgroundAnimation, _pulseAnimation]),
-      builder: (context, child) {
-        return Scaffold(
-          body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  Color.lerp(
-                    // ignore: deprecated_member_use
-                    AppColors.primaryColor.withOpacity(0.06),
-                    Colors.white,
-                    _backgroundAnimation.value,
-                  )!,
-                  Colors.white,
-                ],
-              ),
-            ),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // الـ pulse بيتطبق كـ scale إضافي فوق الـ scale الأصلي بتاع الدخول
-                  Transform.scale(
-                    scale: _pulseAnimation.value,
-                    child: SplashLogo(
-                      opacity: _logoFadeAnimation,
-                      scale: _scaleAnimation,
-                      assetPath: AppAssets.logo,
-                    ),
+    return ValueListenableBuilder<ThemeMode>(
+      valueListenable: themeModeNotifier,
+      builder: (context, themeMode, _) {
+        final isDark =
+            themeMode == ThemeMode.dark ||
+            (themeMode == ThemeMode.system &&
+                MediaQuery.of(context).platformBrightness == Brightness.dark);
+
+        final backgroundColor = isDark
+            ? AppColors.darkBackground
+            : AppColors.whiteColor;
+        final titleColor = isDark ? AppColors.whiteColor : AppColors.blackColor;
+
+        return AnimatedBuilder(
+          animation: Listenable.merge([_backgroundAnimation, _pulseAnimation]),
+          builder: (context, child) {
+            return Scaffold(
+              backgroundColor: backgroundColor,
+              body: Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Color.lerp(
+                        // ignore: deprecated_member_use
+                        AppColors.primaryColor.withOpacity(
+                          isDark ? 0.12 : 0.06,
+                        ),
+                        backgroundColor,
+                        _backgroundAnimation.value,
+                      )!,
+                      backgroundColor,
+                    ],
                   ),
-
-                  HeightSpace(22),
-
-                  SlideTransition(
-                    position: _titleSlideAnimation,
-                    child: FadeTransition(
-                      opacity: _titleFadeAnimation,
-                      child: Text(
-                        'Motora',
-                        style: TextStyle(
-                          fontSize: 30.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.blackColor,
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // الـ pulse بيتطبق كـ scale إضافي فوق الـ scale الأصلي بتاع الدخول
+                      Transform.scale(
+                        scale: _pulseAnimation.value,
+                        child: SplashLogo(
+                          opacity: _logoFadeAnimation,
+                          scale: _scaleAnimation,
+                          assetPath: AppAssets.logo,
                         ),
                       ),
-                    ),
-                  ),
 
-                  HeightSpace(8),
+                      HeightSpace(22),
 
-                  SlideTransition(
-                    position: _taglineSlideAnimation,
-                    child: FadeTransition(
-                      opacity: _taglineFadeAnimation,
-                      child: Text(
-                        'THE FUTURE OF AUTOMOTIVE',
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          letterSpacing: 1.2,
-                          color: AppColors.primaryColor,
+                      SlideTransition(
+                        position: _titleSlideAnimation,
+                        child: FadeTransition(
+                          opacity: _titleFadeAnimation,
+                          child: Text(
+                            'Motora',
+                            style: TextStyle(
+                              fontSize: 30.sp,
+                              fontWeight: FontWeight.bold,
+                              color: titleColor,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
+
+                      HeightSpace(8),
+
+                      SlideTransition(
+                        position: _taglineSlideAnimation,
+                        child: FadeTransition(
+                          opacity: _taglineFadeAnimation,
+                          child: Text(
+                            'THE FUTURE OF AUTOMOTIVE',
+                            style: TextStyle(
+                              fontSize: 12.sp,
+                              letterSpacing: 1.2,
+                              color: AppColors.primaryColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
+                ),
               ),
-            ),
-          ),
+            );
+          },
         );
       },
     );
