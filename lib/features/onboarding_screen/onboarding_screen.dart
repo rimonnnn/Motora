@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:motora/core/routing/app_routes.dart';
-import 'package:motora/core/styling/app_styles.dart';
+import 'package:motora/core/utils/app_text_style_exctention.dart';
 import 'package:motora/core/utils/storage_helper.dart';
 import 'package:motora/core/widgets/primary_button_widget.dart';
 import 'package:motora/core/widgets/spacing_widgets.dart';
@@ -45,7 +45,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
       if (!mounted) return;
 
-      context.pushReplacementNamed(AppRoutes.mainScreen);
+      context.pushReplacementNamed(AppRoutes.signUpScreen);
     } else {
       await _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
@@ -66,12 +66,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Motora", style: AppStyles.primaryHeadLineStyle),
+        title: Text("Motora", style: context.primaryHeadLine),
         centerTitle: true,
         actions: [
           SkipButton(
             onPress: () {
-              _finishOnboarding();
+              _onNextPressed();
             },
           ),
         ],
