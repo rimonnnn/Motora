@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "910094739509",
+    "project_id": "motora-8def9",
+    "storage_bucket": "motora-8def9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910094739509:android:eef60b7e1dcb1a6d80a97c",
+        "android_client_info": {
+          "package_name": "com.example.motora"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi025HcHn8OkYNK6xSCzjTG2SRk18sjUg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

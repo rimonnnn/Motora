@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:motora/core/styling/app_colors.dart';
 import 'package:motora/features/home/home_screen.dart';
+import 'package:motora/features/my_cart/my_cart_screen.dart';
+import 'package:motora/features/profile/profile_screen.dart';
+import 'package:motora/features/sell/sell_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -14,9 +17,9 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> _screens = const [
     HomeScreen(),
-    // SearchScreen(),
-    // SellScreen(),
-    // ProfileScreen(),
+    MyCartScreen(),
+    SellScreen(),
+    ProfileScreen(),
   ];
 
   void _onTap(int index) {
@@ -39,13 +42,19 @@ class _MainScreenState extends State<MainScreen> {
             backgroundColor: AppColors.primaryColor,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.search_outlined),
-            activeIcon: Icon(Icons.search, color: AppColors.primaryColor),
-            label: 'Search',
+            icon: Icon(Icons.shopping_cart),
+            activeIcon: Icon(
+              Icons.shopping_cart,
+              color: AppColors.primaryColor,
+            ),
+            label: 'Cart',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add_circle_outline),
-            activeIcon: Icon(Icons.add_circle, color: AppColors.primaryColor),
+            icon: Icon(Icons.sell_outlined),
+            activeIcon: Icon(
+              Icons.sell_outlined,
+              color: AppColors.primaryColor,
+            ),
             label: 'Sell',
           ),
           BottomNavigationBarItem(
@@ -57,27 +66,4 @@ class _MainScreenState extends State<MainScreen> {
       ),
     );
   }
-}
-
-// -------- Placeholder screens --------
-
-class SearchScreen extends StatelessWidget {
-  const SearchScreen({super.key});
-  @override
-  Widget build(BuildContext context) =>
-      const Scaffold(body: Center(child: Text('Search Screen')));
-}
-
-class SellScreen extends StatelessWidget {
-  const SellScreen({super.key});
-  @override
-  Widget build(BuildContext context) =>
-      const Scaffold(body: Center(child: Text('Sell Screen')));
-}
-
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-  @override
-  Widget build(BuildContext context) =>
-      const Scaffold(body: Center(child: Text('Profile Screen')));
 }

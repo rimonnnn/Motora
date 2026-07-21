@@ -34,7 +34,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
     if (!mounted) return;
 
-    context.pushReplacementNamed(AppRoutes.mainScreen);
+    context.pushReplacementNamed(AppRoutes.signUpScreen);
   }
 
   Future<void> _onNextPressed() async {
@@ -71,7 +71,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         actions: [
           SkipButton(
             onPress: () {
-              _onNextPressed();
+              _finishOnboarding();
             },
           ),
         ],

@@ -1,8 +1,10 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motora/core/routing/router_generator_config.dart';
 import 'package:motora/core/styling/app_theme.dart';
 import 'package:motora/core/utils/storage_helper.dart';
+import 'package:motora/firebase_options.dart';
 
 /// Global theme-mode holder. Flip it from anywhere with:
 /// themeModeNotifier.value = ThemeMode.dark;
@@ -13,6 +15,8 @@ final ValueNotifier<ThemeMode> themeModeNotifier = ValueNotifier(
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   // نقرا الـ theme المحفوظ قبل ما الـ app يشتغل، عشان أول رسمة
   // تبقى بالـ theme الصح من غير flash بالـ default
