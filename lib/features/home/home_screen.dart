@@ -77,7 +77,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeAppBar(
-        avatarUrl: 'https://picsum.photos/seed/avatar/80',
+        avatarUrl:
+            "https://www.bing.com/th/id/OIP.SlK1ag9i92FaWywjd07RcwHaHa?w=193&h=193&c=8&rs=1&qlt=90&r=0&o=6&pid=ImgAns&rm=2",
 
         onAvatarTap: () {},
       ),
@@ -90,7 +91,8 @@ class _HomeScreenState extends State<HomeScreen> {
               badgeText: 'NEW ARRIVAL',
               title: 'Experience The\nFuture of Speed',
               buttonText: 'Explore New Arrivals',
-              backgroundImageUrl: 'https://picsum.photos/seed/city/600/400',
+              backgroundImageUrl:
+                  'https://th.bing.com/th/id/R.ad83a172fc8f2a3f02e804adc53fe840?rik=%2bw1jChCK90RuaQ&riu=http%3a%2f%2ftireinuae.com%2fwp-content%2fuploads%2f2025%2f07%2fTop-New-Cars-of-2025-Arriving-in-Dubai.jpg&ehk=VTb%2fJsCPXgvfwggoPprUQm5L3j9nVAvRuns%2bNTZYHvA%3d&risl=&pid=ImgRaw&r=0',
               onButtonTap: () {},
             ),
             SectionHeader(title: 'Popular Brands', onActionTap: () {}),
