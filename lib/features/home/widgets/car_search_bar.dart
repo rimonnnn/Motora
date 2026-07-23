@@ -20,10 +20,12 @@ class CarSearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
       child: Container(
         decoration: BoxDecoration(
+          // ignore: deprecated_member_use
           color: AppColors.primaryColor.withOpacity(0.08),
           borderRadius: BorderRadius.circular(16),
         ),
@@ -33,9 +35,9 @@ class CarSearchBar extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: TextStyle(color: AppColors.secondaryColor),
-            prefixIcon: Icon(Icons.search, color: AppColors.primaryColor),
+            prefixIcon: Icon(Icons.search, color: colors.secondary),
             suffixIcon: IconButton(
-              icon: Icon(Icons.tune, color: AppColors.primaryColor),
+              icon: Icon(Icons.tune, color: colors.secondary),
               onPressed: onFilterTap,
             ),
             border: InputBorder.none,

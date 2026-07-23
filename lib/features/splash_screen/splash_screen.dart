@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -122,19 +123,14 @@ class _SplashScreenState extends State<SplashScreen>
     await Future.delayed(const Duration(milliseconds: 3200));
 
     if (!mounted) return;
-    GoRouter.of(context).pushReplacementNamed(AppRoutes.signUpScreen);
 
-    // ضع هنا كود الـ Navigation
-    //
-    // مثال:
-    //
-    // final token = await sl<StorageHelper>().getAccessToken();
-    //
-    // if (token != null && token.isNotEmpty) {
-    //   context.pushReplacementNamed(AppRoutes.mainScreen);
-    // } else {
-    //   context.pushReplacementNamed(AppRoutes.loginScreen);
-    // }
+    final user = FirebaseAuth.instance.currentUser;
+
+    if (user != null) {
+      GoRouter.of(context).pushReplacementNamed(AppRoutes.mainScreen);
+    } else {
+      GoRouter.of(context).pushReplacementNamed(AppRoutes.loginScreen);
+    }
   }
 
   @override

@@ -1,9 +1,10 @@
 import 'package:go_router/go_router.dart';
 import 'package:motora/core/routing/app_routes.dart';
+import 'package:motora/features/add_car/add_car_screen.dart';
 import 'package:motora/features/auth/login/login_screen.dart';
+import 'package:motora/features/auth/sign/sign_up_screen.dart';
 import 'package:motora/features/main_screen/main_screen.dart';
 import 'package:motora/features/onboarding_screen/onboarding_screen.dart';
-import 'package:motora/features/auth/sign/sign_up_screen.dart';
 import 'package:motora/features/splash_screen/splash_screen.dart';
 
 class RouterGeneratorConfig {
@@ -35,6 +36,11 @@ class RouterGeneratorConfig {
         path: AppRoutes.onboardingScreen,
         name: AppRoutes.onboardingScreen,
         builder: (context, state) => const OnboardingScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.addScreen,
+        name: AppRoutes.addScreen,
+        builder: (context, state) => const AddCarScreen(),
       ),
     ],
   );

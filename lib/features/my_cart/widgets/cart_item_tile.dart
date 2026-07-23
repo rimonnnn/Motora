@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motora/core/utils/app_text_style_exctention.dart';
@@ -19,79 +20,114 @@ class CartItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('🔥🔥🔥 CartItemTile REBUILT 🔥🔥🔥');
     final colors = Theme.of(context).colorScheme;
 
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // Car image section
-        ClipRRect(
-          borderRadius: BorderRadius.circular(8.r),
-          child: SizedBox(
-            width: 56.w,
-            height: 56.w,
-            child: Image.network(
-              item.imageUrl,
-              width: 56.w,
-              height: 56.w,
-              fit: BoxFit.cover,
+    return Container(
+      padding: EdgeInsets.all(10.r),
+      decoration: BoxDecoration(
+        color: colors.surface,
+        borderRadius: BorderRadius.circular(14.r),
+        border: Border.all(color: colors.outlineVariant.withOpacity(0.4)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // ── Image section ──────────────────────────────
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.r),
+            child: Container(
+              width: 64.w,
+              height: 64.w,
+              color: colors.surfaceContainerHighest,
+              child: CachedNetworkImage(
+                imageUrl: item.imageUrl,
+                width: 64.w,
+                height: 64.w,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Center(
+                  child: SizedBox(
+                    width: 18.w,
+                    height: 18.w,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: colors.primary,
+                    ),
+                  ),
+                ),
+                errorWidget: (context, url, error) => Icon(
+                  Icons.directions_car_outlined,
+                  color: colors.onSurfaceVariant,
+                  size: 24.sp,
+                ),
+              ),
             ),
           ),
-        ),
 
-        WidthSpace(12),
+          WidthSpace(12),
 
-        // Details section — بياخد المساحة المتبقية بعد الصورة وزرار الحذف
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                item.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: context.black16SemiBold.copyWith(
-                  color: colors.onSurface,
+          // ── Details section ─────────────────────────────
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        item.name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: context.black16SemiBold.copyWith(
+                          color: colors.onSurface,
+                        ),
+                      ),
+                    ),
+                    // Remove button — top-right, compact hit target
+                    InkWell(
+                      onTap: onRemove,
+                      borderRadius: BorderRadius.circular(20.r),
+                      child: Padding(
+                        padding: EdgeInsets.all(4.r),
+                        child: Icon(
+                          Icons.delete_outline,
+                          size: 20.sp,
+                          color: colors.error,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
 
-              HeightSpace(4),
+                HeightSpace(4),
 
-              Text(
-                '\$${item.price.toStringAsFixed(0)}',
-                style: context.grey12Medium,
-              ),
-
-              HeightSpace(8),
-
-              QuantityStepper(
-                current: item.quantity,
-                onChanged: onQuantityChanged,
-              ),
-
-              HeightSpace(4),
-
-              Text(
-                '\$${(item.price * item.quantity).toStringAsFixed(0)}',
-                style: context.black16SemiBold.copyWith(
-                  color: colors.onSurface,
+                Text(
+                  '\$${item.price.toStringAsFixed(0)} / each',
+                  style: context.grey12Medium,
                 ),
-              ),
-            ],
+
+                HeightSpace(10),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    QuantityStepper(
+                      current: item.quantity,
+                      onChanged: onQuantityChanged,
+                    ),
+                    Text(
+                      '\$${(item.price * item.quantity).toStringAsFixed(0)}',
+                      style: context.black16SemiBold.copyWith(
+                        color: colors.onSurface,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
-        ),
-
-        // Remove button — IconButton مضغوط بدل TextButton
-        // (TextButton له حد أدنى للعرض بيسبب overflow في Row ضيقة)
-        IconButton(
-          onPressed: onRemove,
-          icon: Icon(Icons.delete_outline, size: 20.sp),
-          color: colors.error,
-          padding: EdgeInsets.zero,
-          constraints: BoxConstraints(minWidth: 32.w, minHeight: 32.w),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

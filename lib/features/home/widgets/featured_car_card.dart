@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motora/core/styling/app_colors.dart';
 
 import '../models/car_model.dart';
@@ -33,6 +34,7 @@ class FeaturedCarCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           boxShadow: [
             BoxShadow(
+              // ignore: deprecated_member_use
               color: Colors.black.withOpacity(0.05),
               blurRadius: 10,
               offset: const Offset(0, 4),
@@ -82,7 +84,7 @@ class FeaturedCarCard extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.primaryColor, // السعر يبان بلون البراند
+                      color: colors.surface, // السعر يبان بلون البراند
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -115,12 +117,12 @@ class _CertifiedBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      padding: EdgeInsets.symmetric(horizontal: 8.sp, vertical: 4.sp),
       decoration: BoxDecoration(
         // اللون هنا مقصود يفضل ثابت (أسود دايمًا) — الهدف إنه يبقى
         // واضح وعالي التباين فوق أي صورة عربية، بغض النظر عن الـ theme
         color: AppColors.blackColor,
-        borderRadius: BorderRadius.circular(6),
+        borderRadius: BorderRadius.circular(6.r),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

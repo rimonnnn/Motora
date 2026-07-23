@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:motora/core/styling/app_colors.dart';
-
 
 /// Reused above every section: "Popular Brands", "Categories",
 /// "Featured Cars", "Recommended For You" all share this exact
@@ -19,6 +17,8 @@ class SectionHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 24, 16, 12),
       child: Row(
@@ -26,19 +26,19 @@ class SectionHeader extends StatelessWidget {
         children: [
           Text(
             title,
-            style:  TextStyle(
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
-              color: AppColors.primaryColor,
+              color: colors.onSurface, // مش primaryColor
             ),
           ),
           GestureDetector(
             onTap: onActionTap,
             child: Text(
               actionText,
-              style:  TextStyle(
+              style: TextStyle(
                 fontSize: 14,
-                color: AppColors.primaryColor,
+                color: colors.secondary,
                 fontWeight: FontWeight.w600,
               ),
             ),

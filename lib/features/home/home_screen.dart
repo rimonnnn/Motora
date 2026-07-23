@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: HomeAppBar(
         avatarUrl: 'https://picsum.photos/seed/avatar/80',
-        onNotificationTap: () {},
+
         onAvatarTap: () {},
       ),
       body: SafeArea(

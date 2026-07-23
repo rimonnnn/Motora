@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:motora/core/styling/app_colors.dart';
-
 
 /// Big promotional banner with a background image, a badge label
 /// ("NEW ARRIVAL"), a headline, and a CTA button.
@@ -24,6 +22,7 @@ class PromoBanner extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: ClipRRect(
@@ -35,6 +34,7 @@ class PromoBanner extends StatelessWidget {
               image: NetworkImage(backgroundImageUrl),
               fit: BoxFit.cover,
               colorFilter: ColorFilter.mode(
+                // ignore: deprecated_member_use
                 Colors.black.withOpacity(0.35),
                 BlendMode.darken,
               ),
@@ -51,8 +51,8 @@ class PromoBanner extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      color: Colors.white,
+                    style: TextStyle(
+                      color: colors.surface,
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       height: 1.2,
@@ -62,8 +62,8 @@ class PromoBanner extends StatelessWidget {
                   ElevatedButton(
                     onPressed: onButtonTap,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.primaryColor,
-                      foregroundColor: Colors.white,
+                      backgroundColor: colors.primary,
+                      foregroundColor: colors.surfaceBright,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -90,16 +90,17 @@ class _Badge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: AppColors.primaryColor,
+        color: colors.primary,
         borderRadius: BorderRadius.circular(6),
       ),
       child: Text(
         text,
-        style: const TextStyle(
-          color: Colors.white,
+        style: TextStyle(
+          color: colors.surfaceBright,
           fontSize: 11,
           fontWeight: FontWeight.bold,
           letterSpacing: 0.5,

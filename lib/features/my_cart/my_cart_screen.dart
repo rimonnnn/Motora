@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:motora/core/utils/app_text_style_exctention.dart';
+import 'package:motora/core/widgets/floating_add_button.dart';
 import 'package:motora/core/widgets/spacing_widgets.dart';
 import 'package:motora/features/my_cart/models/cart_item_model.dart';
 import 'package:motora/features/my_cart/widgets/cart_item_tile.dart';
@@ -55,6 +56,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: Container(),
         title: Text('My Cart', style: context.black16SemiBold),
         backgroundColor: colors.surface,
         foregroundColor: colors.onSurface,
@@ -83,6 +85,7 @@ class _MyCartScreenState extends State<MyCartScreen> {
                 CartSummaryCard(items: _items, onCheckoutTap: _onCheckout),
               ],
             ),
+      floatingActionButton: const FloatingAddButton(),
     );
   }
 }
